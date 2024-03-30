@@ -1,0 +1,8 @@
+<h1>Update Category</h1>
+<form action="" class="container" method="post" enctype="multipart/form-data">
+    Enter category <input type="text" name="Ucategory" class="form-control" value="{{resultId.Catname}}">
+    Description <input type="text" name="Udescription" class="form-control" value="{{resultId.Catdescription}}">
+    Image <input type="file" name="images" value="{{resultId.Catimage}}" class="form-control">
+    <img src="/images/{{resultId.Catimage}}" style="height: 100px; width:150px">
+    <button type="submit" class="btn btn-primary">Update</button>
+</form>

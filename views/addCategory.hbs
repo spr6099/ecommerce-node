@@ -1,0 +1,28 @@
+<h1>Add Category</h1>
+<form action="/addCategory" class="container" method="post" enctype="multipart/form-data">
+    Enter category <input type="text" name="category" class="form-control" placeholder="Enter Category">
+    Description <input type="text" name="description" class="form-control" placeholder="Enter Description">
+    Image <input type="file" name="image" class="form-control">
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+
+<div>
+    <table>
+        <tr>
+            <td>category</td>
+            <td>description</td>
+            <td>image</td>
+
+        </tr>
+        {{#each result}}
+        <tr>
+            <td>{{this.Catname}}</td>
+            <td>{{this.Catdescription}}</td>
+            <td><img src="/images/{{this.Catimage}}" alt="" style="height: 100px; width: 100px"></td>
+            <td> <a href="/updateCategory/{{_id}}"> <button type="submit">!</button></a></td>
+            <td> <a href="/deleteCategory/{{_id}}"><button type="submit">X</button></a> </td>
+
+        </tr>
+        {{/each}}
+    </table>
+</div>
