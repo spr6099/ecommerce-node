@@ -1,0 +1,27 @@
+<h1>Edit Subcategory</h1>
+<form action="" method="post" class="container">
+    {{!-- Category <h1></h1> --}}
+     Parent Category<select name="Catname" id="catid" class="form-control">
+        {{#each categoryDb}}
+        <option value="{{this._id}}">{{this.Catname}}</option>
+        {{/each}}
+    </select>
+<input type="text" value="{{subCatDb.parentCategory}}" name="hide" id="editcat">
+    Subcategory <input type="text" name="UsubCategory" value="{{subCatDb.subCategory}}" class="form-control">
+    <button type="submit" class="btn btn-primary">submit</button>
+</form>
+
+<script>
+    let parentCat=document.getElementById("catid")
+    console.log(parentCat)
+    let hideCat=document.getElementById("editcat").value
+    console.log(hideCat)
+    for(let i=0;i<parentCat.options.length;i++){
+        let option=parentCat.options[i] 
+        if(option.value==hideCat){
+            option.selected=true
+            break;
+        }
+    
+    }
+</script>

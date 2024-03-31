@@ -1,0 +1,29 @@
+<h1>Add Subcategory</h1>
+<form action="/addSubcategory" method="post" class="container">
+
+    Parent Category<select name="Catname" id="" class="form-control">
+        {{#each catResult}}
+        <option value="{{this._id}}">{{this.Catname}}</option>
+        {{/each}}
+    </select>
+
+    Subcategory <input type="text" name="subCategory" class="form-control">
+    <button type="submit" class="btn btn-primary">submit</button>
+</form>
+
+<table>
+
+    <tr>
+        <th>ParentCategory</th>
+   
+        <th>SubCategory</th>
+    </tr>
+    {{#each subCatResult}}<tr>
+        <td>{{this.newdatas.Catname}}  </td>
+    
+        <td>{{this.subCategory}}</td>
+        <td> <a href="/subCatEdit/{{this._id}}" ><button type="submit" class="btn btn-primary">Edit</button></a> </td>
+        <td> <a href="/subCatDelete/{{this._id}}"> <button type="delete" class="btn btn-secondary" >Delete</button> </a> </td>
+    </tr>
+    {{/each}}
+</table>
