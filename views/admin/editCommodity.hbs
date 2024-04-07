@@ -1,0 +1,23 @@
+
+
+
+
+<form action="" method="post" enctype="multipart/form-data" class="container">
+    <h2>Edit Commodity</h2>
+    ParentCategory<select name="" class="form-control">
+        {{#each categoryDB}}
+        <option value="{{this._id}}">{{this.Catname}}</option>
+        {{/each}}
+    </select>
+    {{# commodityDb}}
+
+    Product<input type="text" name="products" class="form-control" value="{{this.product}}">
+    Quantity<input type="text" name="quantitys" class="form-control" value="{{this.quantity}}">
+    Price<input type="text" name="prices" class="form-control" value="{{this.price}}">
+    Description<textarea name="descriptions" class="form-control">{{this.description}}</textarea>
+    Image<input type="file" name="images" value="{{this.image}}" class="form-control">
+    <img src="/images/commodity/{{this.image}}" style="height: 100px; width:150px">
+
+    <button class="btn btn-secondary" type="submit">Submit</button>
+    {{/commodityDb}}
+</form>

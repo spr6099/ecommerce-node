@@ -1,9 +1,9 @@
-var database = require("../../database/database");
 const mongodb = require("mongodb");
+var database = require("../../database/database");
 
 /* GET home page. */
 exports.adminHome = function (req, res, next) {
-  res.render("admin/index");
+  res.render("admin/admin",{admin:true});
 };
 
 exports.addCategoryHome = function (req, res, next) {
@@ -13,7 +13,7 @@ exports.addCategoryHome = function (req, res, next) {
       .find({})
       .toArray()
       .then((result) => {
-        res.render("admin/addCategory", { result });
+        res.render("admin/addCategory", { result ,admin:true});
       });
   });
   // res.render("addCategory");
@@ -26,7 +26,7 @@ exports.updateCat = (req, res) => {
       .collection("addCategory")
       .findOne({ _id: new mongodb.ObjectId(id) })
       .then((resultId) => {
-        res.render("admin/updateCategory", { resultId });
+        res.render("admin/updateCategory", { resultId ,admin:true});
       });
   });
 };
@@ -38,7 +38,7 @@ exports.deleteCat = (req, res) => {
       .collection("addCategory")
       .deleteOne({ _id: new mongodb.ObjectId(id) })
       .then((result) => {
-        res.redirect("/addCategory");
+        res.redirect("/addCategory",{admin:true});
       });
   });
 };
@@ -61,54 +61,77 @@ exports.addSubCat = (req, res) => {
         { $unwind: "$newdatas" },
       ])
       .toArray();
-    res.render("admin/addSubcategory", { catResult, subCatResult });
-    // console.log(subCatResult);
+    res.render("admin/addSubcategory", { catResult, subCatResult ,admin:true});
   });
 };
 
-// exports.subCatEdit = (req, res) => {
-//   let id = req.params.id;
-//   database.then(async (dbase) => {
-//     const subCatDb = await dbase
-//       .collection("subcategory")
-//       .findOne({ _id: new mongodb.ObjectId(id) });
-//     let idP = subCatDb.parentCategory;
-//     const categoryDb = await dbase
-//       .collection("addCategory")
-//       .findOne({ _id: new mongodb.ObjectId(idP) });
-//     console.log({ subCatDb });
-//     console.log({ idP });
-//     res.render("admin/editSubcategory", { categoryDb, subCatDb });
-//   });
-// };
+exports.subCatEdit = (req, res) => {
+  let id = req.params.id;
+  database.then(async (dbase) => {
+    const categoryDb = await dbase.collection("addCategory").find().toArray();
+    // const subCatDb1 = await dbase
+    // .collection("subcategory")
+    // .aggregate([
+    //   { $addFields: { catogoryId: { $toObjectId: "$parentCategory" } } },
+    //   {
+    //     $lookup: {
+    //       from: "addCategory",
+    //       localField: "catogoryId",
+    //       foreignField: "_id",
+    //       as: "lookupdatas",
+    //     },
+    //   },
+    //   { $unwind: "$lookupdatas" },
+    // ])
+    // .toArray();
+    const subCatDb = await dbase
+      .collection("subcategory")
+      .findOne({ _id: new mongodb.ObjectId(id) });
+    res.render("admin/editSubcategory", { categoryDb, subCatDb,admin:true });
+  });
+};
 
-exports.subCatEdit=(req,res)=>{
-      let id = req.params.id;
-      database.then(async (dbase) => {
-        const categoryDb = await dbase
-              .collection("addCategory").find().toArray()
-            const subCatDb = await dbase
-              .collection("subcategory")
-                    .findOne({ _id: new mongodb.ObjectId(id) });
-                        console.log({ categoryDb });
-                        console.log({ subCatDb });
-    res.render("admin/editSubcategory", { categoryDb, subCatDb });
-}
-      )}
-
-exports.subCatDelete= (req, res) => {
+exports.subCatDelete = (req, res) => {
   let id = req.params.id;
   database.then((dbase) => {
     dbase
       .collection("subcategory")
       .deleteOne({ _id: new mongodb.ObjectId(id) })
       .then((result) => {
-        res.redirect("/addSubcategory");
+        res.redirect("/addSubcategory",{admin:true});
       });
   });
 };
 
-exports.addcommodity=(req, res) => {
-  res.render("admin/addCommodity");
+exports.addcommodity = (req, res) => {
+  database.then(async (dbase) => {
+    const categoryDB = await dbase.collection("addCategory").find({}).toArray();
+    const commodityDB = await dbase
+      .collection("commodity")
+      .aggregate([
+        { $addFields: { categoryId: { $toObjectId: "$Catname" } } },
+        {
+          $lookup: {
+            from: "addCategory",
+            localField: "categoryId",
+            foreignField: "_id",
+            as: "lookupData",
+          },
+        },
+        { $unwind: "$lookupData" },
+      ])
+      .toArray();
+    res.render("admin/addCommodity", { categoryDB, commodityDB ,admin:true});
+  });
 };
 
+exports.editCommodity = (req, res) => {
+  let id = req.params.id;
+  database.then(async (dbase) => {
+    const categoryDB = await dbase.collection("addCategory").find({}).toArray();
+    const commodityDb = await dbase
+      .collection("commodity")
+      .findOne({ _id: new mongodb.ObjectId(id) });
+    res.render("admin/editCommodity", { categoryDB, commodityDb ,admin:true});
+  });
+};

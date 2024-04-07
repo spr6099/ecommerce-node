@@ -1,8 +1,40 @@
 body {
-  padding: 50px;
+  padding: 10px;
+  background-color: rgb(166, 201, 215);
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
+
+/*  admin.hbs */
+.home {
+  display: flex;
+  background-color: whitesmoke;
+}
+.sidebar {
+  text-decoration: none;
+  width: 150px;
+  background-color: rgb(233, 232, 232);
+}
+ul {
+  list-style-type: none;
+}
 a {
-  color: #00B7FF;
+  color: #00b7ff;
+  text-decoration: none;
+}
+.marquee {
+  padding-top: 250px;
+  font-weight: bolder;
+  font-family: Georgia, "Times New Roman", Times, serif;
+  color: rgb(182, 31, 31);
+  text-shadow: 4px 4px 4px rgb(219, 18, 18);
+  animation: blinker 1.5s linear infinite;
+}
+.content {
+  width: 800px;
+  height: 800px;
+}
+/* header.hbs */
+.navbar {
+  background-color: rgb(223, 219, 219);
 }

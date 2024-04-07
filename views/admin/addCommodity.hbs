@@ -1,13 +1,51 @@
-<form action="">
+<div class="home">
+    <div class="sidebar" role="cdb-sidebar" color="pink">
+        <ul>
+            <li class="side"><a href="/addCategory">Category</a>
+            </li>
+            <li class="side"><a href="/addSubcategory">Subcategory</a>
+            </li>
+            <li class="side"><a href="/addCommodity">Commodity</a>
+            </li>
+        </ul>
+    </div>
+    <div>
+<form action="/addCommodity" method="post" enctype="multipart/form-data">
     <h2>Add Commodity</h2>
-    ParentCategory<select name=""  class="form-control">
-        <option value="">Car</option>
+    ParentCategory<select name="Catname" class="form-control">
+        {{#each categoryDB}}
+        <option value="{{this._id}}">{{this.Catname}}</option>
+        {{/each}}
     </select>
-            Product<input type="text" class="form-control">
-            Quantity<input type="text" class="form-control">
-            Price<input type="text" class="form-control">
-            Description<textarea class="form-control"></textarea>
-            Image<input type="file">
-            <button class="btn">Submit</button>
-
+    Product<input type="text" name="product" class="form-control" placeholder="Enter Product">
+    Quantity<input type="text" name="quantity" class="form-control" placeholder="Enter Quantity">
+    Price<input type="text" name="price" class="form-control" placeholder="Enter Price">
+    Description<textarea name="description" class="form-control" placeholder="Enter Description"></textarea>
+    Image<input type="file" name="image" class="form-control">
+    <button class="btn btn-secondary">Submit</button>
 </form>
+
+<table>
+    <tr>
+        <td>pCategory</td>
+        <td>product</td>
+        <td>Quantity</td>
+        <td>price</td>
+        <td>description</td>
+        <td>images</td>
+    </tr>
+    {{#each commodityDB}}
+    <tr>
+        <td>{{this.lookupData.Catname}}</td>
+        <td>{{this.product}}</td>
+        <td>{{this.quantity}}</td>
+        <td>{{this.price}}</td>
+        <td>{{this.description}}</td>
+        <td><img src="/images/commodity/{{this.image}}" style="height: 100px; width: 100px"></td>
+        <td><a href="/editCommodity/{{_id}}"><button type="submit" class="btn btn-primary" >Edit</button></a> </td>
+        <td> <a href=""> <button type="submit" class="btn btn-primary">Delete</button> </a> </td>
+    </tr>
+    {{/each}}
+</table>
+</div>
+</div>
