@@ -38,7 +38,7 @@ exports.deleteCat = (req, res) => {
       .collection("addCategory")
       .deleteOne({ _id: new mongodb.ObjectId(id) })
       .then((result) => {
-        res.redirect("/addCategory",{admin:true});
+        res.redirect("/admin/addCategory",{admin:true});
       });
   });
 };
@@ -98,7 +98,7 @@ exports.subCatDelete = (req, res) => {
       .collection("subcategory")
       .deleteOne({ _id: new mongodb.ObjectId(id) })
       .then((result) => {
-        res.redirect("/addSubcategory",{admin:true});
+        res.redirect("/admin/addSubcategory",{admin:true});
       });
   });
 };

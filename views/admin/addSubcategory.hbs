@@ -1,18 +1,18 @@
 <div class="home">
     <div class="sidebar" role="cdb-sidebar" color="pink">
         <ul>
-            <li class="side"><a href="/addCategory">Category</a>
+            <li class="side"><a href="/admin/addCategory">Category</a>
             </li>
-            <li class="side"><a href="/addSubcategory">Subcategory</a>
+            <li class="side"><a href="/admin/addSubcategory">Subcategory</a>
             </li>
-            <li class="side"><a href="/addCommodity">Commodity</a>
+            <li class="side"><a href="/admin/addCommodity">Commodity</a>
             </li>
         </ul>
     </div>
     <div>
 
 <h1>Add Subcategory</h1>
-<form action="/addSubcategory" method="post" class="container">
+<form action="" method="post" class="container">
 
     Parent Category<select name="Catname" id="" class="form-control">
         {{#each catResult}}
@@ -35,8 +35,8 @@
         <td>{{this.newdatas.Catname}}  </td>
     
         <td>{{this.subCategory}}</td>
-        <td> <a href="/subCatEdit/{{this._id}}" ><button type="submit" class="btn btn-primary">Edit</button></a> </td>
-        <td> <a href="/subCatDelete/{{this._id}}"> <button type="delete" class="btn btn-secondary" >Delete</button> </a> </td>
+        <td> <a href="/admin/subCatEdit/{{this._id}}" ><button type="submit" class="btn btn-primary">Edit</button></a> </td>
+        <td> <a href="/admin/subCatDelete/{{this._id}}"> <button type="delete" class="btn btn-secondary" >Delete</button> </a> </td>
     </tr>
     {{/each}}
 </table>

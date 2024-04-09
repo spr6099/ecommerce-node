@@ -14,3 +14,5 @@ app.js
 ## npm i express-handlebars
 
 ## npm install bcrypt
+
+## npm install express-session

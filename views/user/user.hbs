@@ -1,0 +1,14 @@
+{{#each commodity}}
+<div class="card" style="width: 18rem;">
+  <img class="card-img-top" src="/images/commodity/{{this.image}}" alt="Card image cap">
+  <div class="card-body">
+    <h5 class="card-title">{{this.product}}</h5>
+    <p class="card-text">{{this.description}}</p>
+    <p class="card-text">Rs.{{this.price}}</p>
+
+    <a href="cart/{{_id}}" ><button type="submit" class="btn btn-primary">Add to crt</button></a>
+    
+  </div>
+</div>  
+  
+{{/each}}

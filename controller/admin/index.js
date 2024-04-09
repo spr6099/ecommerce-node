@@ -81,7 +81,7 @@ router.post("/addSubcategory", (req, res) => {
       .insertOne(subCategorys)
       .then((result) => {
         // console.log(result);
-        res.redirect("/addSubcategory");
+        res.redirect("/admin/addSubcategory");
       });
   });
 });
@@ -96,7 +96,7 @@ router.post("/subCatEdit/:id", (req, res) => {
       .collection("subcategory")
       .updateOne({ _id: new mongodb.ObjectId(id) }, { $set: subCategory })
       .then((result) => {
-        res.redirect("/addSubcategory");
+        res.redirect("/admin/addSubcategory");
       });
   });
 });
@@ -123,7 +123,7 @@ router.post("/addCommodity", (req, res) => {
           .mv("./public/images/commodity/" + commodityData.image)
           .then((rslt) => {});
       });
-    res.redirect("/addCommodity");
+    res.redirect("/admin/addCommodity");
   });
 });
 
@@ -164,7 +164,7 @@ router.post("/editCommodity/:id", (req, res) => {
       .collection("commodity")
       .updateOne({ _id: new mongodb.ObjectId(id) }, { $set: updateCommodity })
       .then((result) => {
-        res.redirect("/addCommodity");
+        res.redirect("/admin/addCommodity");
       });
   });
 });
